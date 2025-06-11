@@ -79,7 +79,6 @@ https://github.com/blarney-lang/template-project/[Blarney template project].
 == Documentation
 
 See https://www.repository.cam.ac.uk/handle/1810/385421[Abstracting the Classic Five-Stage Pipeline], a tutorial paper that introduces Blarney and applies it to the development of a simple processor pipeline.
-
 Also see
 https://github.com/blarney-lang/blarney/blob/master/Doc/ByExample.adoc[Blarney
 by Example], a more general introduction to Blarney, which supplements the
