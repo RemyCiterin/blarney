@@ -51,6 +51,7 @@ import qualified GHC.HsToCore as GHC
 import qualified GHC.Tc.Types.Evidence as GHC
 import qualified GHC.Types.TyThing as GHC
 import qualified GHC.Types.SourceText as GHC
+import qualified GHC.Types.PkgQual as GHC
 import qualified GHC.Hs.Pat as Pat
 import qualified GHC.Hs.Expr as Expr
 import qualified GHC.Core.Utils as CoreUtils
@@ -94,7 +95,7 @@ tcPass _ modS env = do
   count  <- liftIO $ newIORef 0
   hs_env <- GHC.Tc.Utils.Monad.getTopEnv
   blMod  <- liftIO $ GHC.Unit.Finder.findImportedModule hs_env
-                    (GHC.mkModuleName "Blarney.Core.Module") Nothing
+                    (GHC.mkModuleName "Blarney.Core.Module") GHC.NoPkgQual
   case blMod of
     GHC.Found _ m -> do
       blNoNameVar <- GHC.Iface.Env.lookupOrig m (GHC.mkVarOcc "noName")
