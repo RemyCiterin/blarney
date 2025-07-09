@@ -64,7 +64,7 @@ namePropagate mnlRef = do
                     } = "DEST_" ++ nm
                         where nm = if null nms
                                    then primStr prim ++ "_id" ++ show instId
-                                   else (foldMap) (\s -> s ++ "_") nms
+                                   else foldMap (\s -> s ++ "_") nms
                               nms = [y | x@(NmRoot _ y) <- toList hints]
         --
         isDest Register{}     = True

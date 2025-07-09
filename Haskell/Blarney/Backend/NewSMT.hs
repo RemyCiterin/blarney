@@ -386,7 +386,7 @@ defineTransition (VerifConf{..}, NetConf{..}) netlist net = do
       (Or _, [_, _]) -> Just $ smtOpN "bvor" args
       (Xor _, [_, _]) -> Just $ smtOpN "bvxor" args
       (ShiftLeft _ _, [_, _]) -> Just $ smtOpN "bvshl" args
-      (ShiftRight _ _, [_, _]) -> Just $ smtOpN "bvshr" args
+      (ShiftRight _ _, [_, _]) -> Just $ smtOpN "bvlshr" args
       (ArithShiftRight _ _, [_, _]) -> Just $ smtOpN "bvashr" args
       (Concat _ _, [_, _]) -> Just $ smtOpN "concat" args
       (LessThan _, [_, _]) -> Just $ smtBool2BV $ smtOpN "bvult" args
