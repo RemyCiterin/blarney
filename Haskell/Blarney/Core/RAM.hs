@@ -416,14 +416,13 @@ makeDualRAMForwardCore init = do
       storeData <== d
   , out =
       let forwardCond =
-            delay false $
+            delayEn false (active loadAddr) $
               andList [
-                active loadAddr
-              , active storeAddr
+                active storeAddr
               , loadAddr.val === storeAddr.val
               ]
           forwardData =
-            delay dontCare storeData.val
+            delayEn dontCare (active loadAddr) storeData.val
       in forwardCond ? (forwardData, out ram)
   , storeActive = storeActive ram
   }
@@ -617,16 +616,15 @@ makeDualRAMForwardBECore init = do
       storeByteEn <== be
   , outBE =
       let forwardCond =
-            delay false $
+            delayEn false (active loadAddr) $
               andList [
-                active loadAddr
-              , active storeAddr
+                active storeAddr
               , loadAddr.val === storeAddr.val
               ]
           forwardData =
-            delay dontCare storeData.val
+            delayEn dontCare (active loadAddr) storeData.val
           forwardByteEn =
-            delay 0 storeByteEn.val
+            delayEn 0 (active loadAddr) storeByteEn.val
           outData = fromBitList
             [ (forwardCond .&&. be) ? (new, old)
             | (be, new, old) <-
