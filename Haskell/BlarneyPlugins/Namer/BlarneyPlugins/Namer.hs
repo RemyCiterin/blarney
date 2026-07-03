@@ -141,10 +141,10 @@ nameModule count (GHC.Found _ m)
         let namerE = bLoc $ GHC.mkHsWrap (GHC.WpTyApp tyArg)
                           $ GHC.HsVar noExt
                               (GHC.L (GHC.l2l $ GHC.getLoc body) namer)
-        let nameE  = bLoc $ GHC.HsLit GHC.noAnn
+        let nameE  = bLoc $ GHC.HsLit GHC.noExtField
                           $ GHC.HsString GHC.NoSourceText (GHC.fsLit name)
-        let namedE = bLoc $ GHC.HsApp GHC.noAnn namerE nameE
-        let body'  = bLoc $ GHC.HsApp GHC.noAnn namedE body
+        let namedE = bLoc $ GHC.HsApp GHC.noExtField namerE nameE
+        let body'  = bLoc $ GHC.HsApp GHC.noExtField namedE body
         liftIO $ modifyIORef' count (+1)
         return $ GHC.L loc (Expr.BindStmt xbind pat body')
       _ -> return e
